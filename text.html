@@ -1,0 +1,69 @@
+@extends("layouts.master")
+
+@section("content")	
+	<div id="newPart">
+		<form action="/addPartma" method="POST">
+				<!-- IMPORTANT INFORMATION -->
+				<div id="impInfo" class="panel panel-default">
+					<div class="panel-body">
+					  <table>
+					  	<tr>
+							<td><input type="text" class="form-control" name="address" id="address" placeholder="address"></td>
+					        </tr>
+						<tr>
+							<td>
+
+			<select class="form-control" name="city">
+				<option>Choose a city</option>
+				<option>Casablanca</option>
+				<option>Tanger</option>
+				<option>Fes</option>
+				<option>Tetouan</option>
+				<option>Rabat</option>
+				<option>Oujda</option>
+				<option>Agadir</option>
+				<option>Marrackech</option>
+				<option>Layoun</option>
+			</select>
+						</td>
+						</tr>
+						<tr>
+							<td><input type="radio" class="form-control" name="rent"/></td>
+							<td><input type="radio" class="form-control" name="buy" /></td>
+						</tr>
+						<tr>
+							<td>
+				<div class="input-group">
+				<input type="text" class="form-control" name="price"  placeholder="price">
+				<div class="input-group-addon">$</div>
+			</div>
+							</td>
+							<td>
+				<div class="input-group">
+				<input type="text" class="form-control" name="surface"  placeholder="surface">
+				<div class="input-group-addon">m &#8730;</div>
+			</div><br>
+							</td>
+						</tr>
+						<tr></tr>
+						</table>
+					</div>
+				</div>
+				<!--  INFORMATION SECONDARY-->
+		
+
+	<div id="addInfo" class="panel panel-default">
+	<div class="panel-heading" data-toggle="collapse" data-target="#addPn"><a data-toggle="collapse" href="#addPn">Addintional information +</a></div>
+	<div class="panel-body collapse" id="addPn">
+				<input class="form-control" type="text" name="zipcode" placeholder="zip code" /><br>
+				<select class="form-control" name="neig">
+					<option>La girond</option>
+					<option>Derb Kabir</option>
+					<option>Derb Milan</option>
+					<option>Derb lihoudi</option>
+				</select>
+			</div>
+	</div>
+			</form>
+	</div>
+@endsection

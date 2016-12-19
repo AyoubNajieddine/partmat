@@ -1,0 +1,29 @@
+#header {
+	box-shadow:0 1px 1px rgba(0, 0, 0, 0.05);
+	border-bottom:1px solid #DDDDDD;
+	background-color:#002747;
+	color:white;
+	display:block;
+	font-size:20px;
+	position:relative;
+}
+#itm {
+	padding:10px 5px;
+}
+#header  li {
+	display:inline-block;
+	position:relative;
+}
+#header ul {
+	padding:0;
+	margin-bottom:0;
+}
+#header a {
+	color:white;
+}
+#mnu {
+	font-size:12px;
+}
+table {
+	margin-bottom:1px !important;
+}
