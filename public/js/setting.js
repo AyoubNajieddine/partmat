@@ -1,24 +1,34 @@
 $(document).ready(function(){
 	elem = $("#wrapper");
 	data = document.getElementById("upd").getElementsByTagName("tr");
-	console.log(data);
+	$(data[3]).click(function(){
+		window.location.hash = Math.random();
+		$.get("/delcnt", function(res){$(elem).html(res)});
+	});
 	$(data[0]).click(function(){
 		// get the data from ajax // EMAIL CHANGE
-		$.get("/updeml", function(data){
-			elem.html(data);
+		window.location.hash = Math.random();
+		$.get("/updeml", function(res){
+			elem.html(res);
 		});
 	});
 	$(data[1]).click(function(){
 		// PASSWORD CHANGE
-		$.get("/updpwd", function(data){
-			elem.html(data);
+		window.location.hash = Math.random();
+		$.get("/updpwd", function(res){
+			elem.html(res);
 		});
 	});
 	$(data[2]).click(function(){
 		// FULL CHANGE
-		  $.get("/updnm", function(data){
-		  	elem.html(data);
+		window.location.hash = Math.random();
+		  $.get("/updnm", function(res){
+		  	elem.html(res);
 		  });
-		
 	});
+	window.onhashchange = function(){
+			if(window.location.hash == ""){
+					document.location = "/upd/";
+			}
+	}
 });

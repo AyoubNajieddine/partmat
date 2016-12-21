@@ -12,10 +12,11 @@
 	</ul>
 	</div>
 	@if(Auth::check())
-			<div id="mnu" class="collapse">
+			<div id="mnu" class="collapse" dir="rtl">
 			<table class="table">
-			<tr onclick="document.location='/upd'"><td>Settings</td></tr>
-			<tr onclick="document.location='/logout'"><td>logout</td></tr>
+			<tr onclick="document.location='/upd'"><td>{{trans("header.settings")}}</td></tr>
+			<tr onclick="document.location='/contUs'"><td>{{trans("header.cont_us")}}</td></tr>
+			<tr onclick="document.location='/logout'"><td>{{trans("header.logout")}}</td></tr>
 			</table>
 			</div>
 	@endif

@@ -56,4 +56,11 @@ Route::get("/updpwd",function(){
 Route::get("/updnm",function(){
 	return view("updnm");
 });
-
+Route::post("/updusr/{tp}", "userCont@updUser");
+Route::get("/delcnt", function(){
+	return view("delcnt");
+});
+Route::post("/eml", "userCont@updEmail");
+Route::post("/pwd", "userCont@updPassword");
+Route::post("/nm", "userCont@updName");
+Route::post("/deluser", "userCont@deluser");

@@ -12,7 +12,7 @@
 	<body>
 		@include("layouts.header")
 		@yield("header")
-		<div class="container" id="wrapper">
+		<div class="container" id="wrapper" dir="rtl">
 		@yield("content")
 		</div>		
 	</body>

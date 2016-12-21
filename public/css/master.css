@@ -1,3 +1,7 @@
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css); 
+body {
+	font-family: 'Droid Arabic Kufi', sans-serif; 
+}
 .inp {
 	background-color:#002747;
 }
