@@ -3,16 +3,36 @@
 	border-bottom:1px solid #DDDDDD;
 	background-color:#002747;
 	color:white;
-	display:block;
 	font-size:20px;
-	position:relative;
+	height:45px;
+	position:fixed;
+	width:100%;
+	top:0px;
 }
 #itm {
-	padding:10px 5px;
+	/*height:40px;*/
+	width:98%;
+	margin:auto;
 }
-#header  li {
+#logo img{
+	height:20px;
+}
+#logo {
+	padding-top:10px;
+}
+#logo,#menu {
+	display:inline-block;
+}
+
+#menu {
+	padding-top:5px;
+	float:right;
+}
+#header li {
+	margin-right:10px;
 	display:inline-block;
 	position:relative;
+	width:30px;
 }
 #header ul {
 	padding:0;
@@ -23,7 +43,21 @@
 }
 #mnu {
 	font-size:12px;
+	position:fixed;
+	right:1px;
+	top:44px;
+	background-color:#001b33;
+	color:white;
+	//background-color:white;
+	width:200px;
+	font-size:18px;
+	z-index:1;
+    box-shadow: 0 8px 6px -6px black;
 }
 table {
 	margin-bottom:1px !important;
+	border:0 !important;
+}
+table td {
+	//border:;
 }

@@ -32,8 +32,13 @@ class userCont extends Controller
 	}
 	}
 	function register(Request $req){
-	 
 	   if(Auth::check() == false){
+		$validator = Validator::make($req->all(),[
+			"email" => "required|unique:users|email",
+			"password" => "required|min:6",
+			"full_name" => "required|max:100",
+		]);	 
+		if(!$validator->fails()){
 		$user = new User;	
 		$user->full_name = $req['full_name'];
 		$user->password = bcrypt($req['password']);
@@ -44,7 +49,12 @@ class userCont extends Controller
 		}else {
 			return "0";
 		}
-	    }
+		}
+		else {
+			return redirect()->back()->withErrors($validator->errors());
+		}
+		}
+		
 	}
 	
 	function logout(){
@@ -53,8 +63,12 @@ class userCont extends Controller
 	}
 	function updEmail(Request $req){
 			// we still need to validate the form
+		$validator =  Validator::make($req->all(), [
+			"email" => "required|unique:users",
+		]);
 		$email = $req['email'];
 		$email_comf = $req['cr_email'];
+		if(!$validator->fails()){
 		if($email == $email_comf){
 			// then we gonna add
 			$user = Auth::user();
@@ -67,13 +81,24 @@ class userCont extends Controller
 			}
 		}else {
 			// error Message
+			$validator->errors()->add("email_not_match", "email_match");
+			return back()->withErrors($validator);
+		}
+		}
+		else {
+			return back()->withErrors($validator->errors());
 		}
 	}
 	function updPassword(Request $req){
 			// we still need to validate the form
+			$validator = Validator::make($req->all(), [
+				"password" => "required|min:6",
+				"cm_password" => "required",
+			]);
 			$old_password = $req['cr_password'];
 			$password = $req['password'];	
 			$password_comf = $req['cm_password'];
+			if(!$validator->fails()){
 		if($password == $password_comf){
 			$user = Auth::user();
 			$hash = new hasher;
@@ -89,24 +114,38 @@ class userCont extends Controller
 			}
 			else {
 				// old password is not the same
-				echo "rong old password";
+			$validator->errors()->add("rong_old_password", "rong_old_password");
+			return redirect()->back()->withErrors($validator->errors());
+				
 			}
 		}else {
-			// password don't match Error
-				echo "password don't match";
+			$validator->errors()->add("password_not_match", "password_not_match");
+			return redirect()->back()->withErrors($validator->errors());
 		}	
+	}else {
+			return redirect()->back()->withErrors($validator->errors());
+		}
 	}
 	function updName(Request $req){
 			// we still need to validate the form
+			$validator = Validator::make($req->all(), [
+			"fname" => "required|max:50",
+			"lname" => "required|max:50",
+			]);
 			$first_name = $req['fname'];
 			$last_name = $req['lname'];
 			$user = Auth::user();
 			$user->full_name = $first_name." ".$last_name;
+		if(!$validator->fails()){
 			if($user->save()){
 				return redirect("/upd");
 			}else {
 				// error Message
+					
 			}		
+		}else {
+			return back()->withErrors($validator->errors());
+		}
 	}
 	function delUser(){
 		$id = (Auth::user())->id;

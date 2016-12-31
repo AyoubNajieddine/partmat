@@ -1,3 +1,5 @@
+@extends("layouts.master")
+@section("content")
 <center>
 <div id="delcnt">
 	<form action="/deluser" method="POST" >
@@ -13,3 +15,4 @@
 	</form>
 </div>
 </center>
+@endsection

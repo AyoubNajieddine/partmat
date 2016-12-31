@@ -13,4 +13,6 @@
 	</form>
 	</div><br>
 		<a href="/register" class="btn btn-lg fl btn-success">{{ trans("login.btn_register") }}</a>
+		<br><br>
+		<center><a href="/resetReq">Forgot password ?</a></center>
 @endsection

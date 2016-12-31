@@ -1,7 +1,7 @@
 <?php 
 
 return array(
-	"settings" => "إعدادات",
+	"settings" => "المعلومات الخاصة",
 	"cont_us" => "إتصل بنا",
 	"logout" => "الخروج",
 	);
