@@ -1,0 +1,14 @@
+#addpar {
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    box-shadow:0px 2px 12px #000000;
+}
+#addpar img {
+    margin-top:10px;
+    height:29px;
+    width:29px;	
+}

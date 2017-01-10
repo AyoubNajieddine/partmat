@@ -14,6 +14,18 @@
 Route::get('/', function () {
     return view('home');
 });
+Route::get("/lang/{lg}", function($lg){
+	switch($lg){
+		case "ar": 
+			Session::put("lang", "ar");
+			App::setLocale("ar");
+		break;
+		case "fr": 
+			Session::put("lang", "fr");
+		        App::setLocale("fr");
+		break;
+	}
+});
 Route::get("/hood/{id}", function($id){	
 	$data = file_get_contents("http://codepostal.ma/search_mot.aspx?keyword=".$id);
 	$dom = new DOMDocument;
@@ -29,17 +41,13 @@ Route::get("/hood/{id}", function($id){
 	/******************************************************************/
 
 Route::get("/dashboard", "dashCont@getDash")->middleware("auth");
-Route::get("/new", function(){
-	return view("new");
-})->middleware("auth");
 
 // USER AUTH VIEWS
-Route::get("/login", function(){
-     return view("user.auth.login");
-});
+
+
 Route::get("/register" ,function(){
 	if(Auth::check() == false){
-    return view('user.auth..register');
+    return view('user.auth.register');
 	}else {
     return redirect("/dashboard");
 	}
@@ -53,7 +61,13 @@ Route::get("/tst", "dashCont@tstInh");
 
 	/******************************************************************/
 
-
+Route::get("/login", function(){
+if(Auth::check() == false){
+    return view('user.auth.login');
+	}else {
+    return redirect("/dashboard");
+	}
+});
 // USER INFO VIEWS
 Route::group(['middleware'=>"auth"], function(){
 Route::get("upd", function(){
@@ -70,6 +84,7 @@ Route::get("/upd/updnm",function(){
 });
 Route::get("/delcnt", function(){
 	return view("user.info.delcnt");
+
 });
 // USER INFO CONTROLLERS
 Route::post("/eml", "userCont@updEmail");
@@ -86,3 +101,18 @@ Route::get("/resetReq", function(){ return View("user.password_reset.resetReq");
 Route::get("/password/reset/{token}", function($token){ return View("user.password_reset.resetSub")->with(["tkn" =>  $token]); });
 
 
+
+		/**********************************************/
+
+Route::group(['middleware' => 'auth'], function(){
+Route::get("/new/frm/{tp}", function($tp){	
+		return view("retail.frmdyn")->with(["tp"=>$tp]);
+});
+Route::get("/new", function(){ 
+	$cities = App\city::all();
+	return view("retail.new")->with(["cities"=>$cities]); 
+
+	});
+Route::get("addRetail", "retailCont@newRetail");
+Route::post("/retail/upl", "pictCont@addPics");
+});

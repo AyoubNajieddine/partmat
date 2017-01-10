@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class partma extends Model
+class picture extends Model
 {
     //
-	
 }

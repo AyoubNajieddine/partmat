@@ -19,7 +19,13 @@ class userCont extends Controller
 			
 		]);
 	if(!$validator->fails()){ // checking the validator
-		if(Auth::attempt(["email"=>$req['email'], "password"=>$req['password']])){
+		if($req['remember'] == true){
+				$rem = true;
+		}
+		else {
+				$rem = false;
+		}
+		if(Auth::attempt(["email"=>$req['email'], "password"=>$req['password']], $rem)){
 			return redirect("/dashboard");	
 		}else {
 			// we have our error and we have 

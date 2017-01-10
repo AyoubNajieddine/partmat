@@ -2,6 +2,9 @@
 body {
 	font-family: 'Droid Arabic Kufi', sans-serif; 
 }
+#wrapper {
+
+}
 .inp {
 	background-color:#002747;
 }
@@ -10,6 +13,6 @@ body {
 }
 
 #wrapper {
-
-	margin-top:60px;
+	margin-top:16px;
+	
 }
