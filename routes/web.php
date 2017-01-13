@@ -113,7 +113,7 @@ Route::get("/new", function(){
 	return view("retail.new")->with(["cities"=>$cities]); 
 
 	});
-Route::get("addRetail", "retailCont@newRetail");
+Route::post("addRetail", "retailCont@newRetail");
 Route::post("/retail/upl", "pictCont@addPics");
 Route::get("/retail/delpic/{pic}","pictCont@delPic");
 });

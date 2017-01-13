@@ -17,7 +17,7 @@ $("#newpart").ready(function(){
 function updProgress(evt){
 		if(evt.lengthComputable){
 			var percent = Math.round((evt.loaded / evt.total) * 100);
-			$("#upld").text(percent+"%");
+			$(".glyphicon-camera").text(" "+percent+"%");
 		}
 }
 function xhrChange(x){
@@ -27,7 +27,8 @@ function xhrChange(x){
 		console.log(name);
 		appData = "<input  type='hidden' name='pics[]' value='"+name+"'/>";
 		$("#newpart form").append(appData);
-		$("#img_div").append("<div class='thumb_div'><span class='glyphicon glyphicon-remove-sign thumb_cls text-danger' src='"+name+"'></span><img class='img-thumbnail upl_list' width='100px' height='100px' src='thumbs/"+name+"'/></div>");
+		$("#img_div").append("<div class='thumb_div'><span class='glyphicon glyphicon-remove-sign thumb_cls text-danger' src='"+name.replace(".","-")+"'></span><img class='img-thumbnail upl_list' width='100px' height='100px' src='thumbs/"+name+"'/></div>");
+		$(".glyphicon-camera").text("");
 		}
 	};
 }
@@ -44,8 +45,7 @@ function uploadFiles(){
 		xhr.upload.onprogress = updProgress;
 		xhr.open("POST","/retail/upl", true);
 		xhr.send(frm)
-		xhrChange(xhr);
-			
+		xhrChange(xhr);	
 		});
 }
 
@@ -59,6 +59,6 @@ function delThumb(){
 		elem =  $(this)[0].parentElement;
 		src = $(this).attr("src");
 		$(elem).remove();
-		$.post("/retail/delpic/"+src);	
+		$.get("/retail/delpic/"+src);	
 	});
 }

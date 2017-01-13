@@ -8,8 +8,8 @@ class CreateRetailInfosTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
+	     *
+	     * @return void
      */
     public function up()
     {
@@ -23,12 +23,14 @@ class CreateRetailInfosTable extends Migration
 	    $table->integer("user_id")->unsigned();
 	    $table->foreign("user_id")->references("id")->on("users");
 	    $table->string("phone");
-	    $table->boolean("rent"); // true for rent false for buy
+	    $table->integer("rent")->in([1,2]); // true for rent false for buy
 	    $table->double("price");
 	    $table->double("surface");
-	    $table->integer("rentPer")->in([1,2]); // 1 per month , 2 per day
-	    $table->string("type")->in(["apprt", "villa", "house", "store", "flat", "land", "vacc"]);
-	    $table->integer("nbRooms")->in([1,2,3,4,5,6,7,8,9,10]);
+	    $table->boolean("balc")->default(false)->nullable();
+	    $table->boolean("gar")->default(false)->nullable();
+	    $table->boolean("furn")->default(false)->nullable();
+	    $table->string("type")->in(["ap", "vi", "ho", "st", "flat", "la", "va"]);
+	    $table->integer("nbRooms")->in([1,2,3,4,5,6,7,8,9,10])->default(-1)->nullable();
             $table->timestamps();
 
         });

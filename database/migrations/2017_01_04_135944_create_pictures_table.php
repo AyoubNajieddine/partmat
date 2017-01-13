@@ -16,8 +16,8 @@ class CreatePicturesTable extends Migration
         Schema::create('pictures', function (Blueprint $table) {
             $table->increments('id');
 	    $table->string("picture_name");
-	    $table->integer("retailId")->unsigned();
-	    $table->foreign("retailId")->references("id")->on("retail_infos");
+	    $table->integer("retail_info_id")->unsigned();
+	    $table->foreign("retail_info_id")->references("id")->on("retail_infos");
             $table->timestamps();
         });
     }

@@ -26,4 +26,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+	
+	function retails(){
+		return $this->hasMany("App\RetailInfo");
+	}		
 }
