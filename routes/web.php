@@ -40,7 +40,6 @@ Route::get("/hood/{id}", function($id){
 
 	/******************************************************************/
 
-Route::get("/dashboard", "dashCont@getDash")->middleware("auth");
 
 // USER AUTH VIEWS
 
@@ -56,7 +55,6 @@ Route::get("/register" ,function(){
 Route::get("/logout", "userCont@logout");
 Route::post("/addUser", "userCont@register");
 Route::post("/logUser", "userCont@login");
-Route::get("/tst", "dashCont@tstInh");
 
 
 	/******************************************************************/
@@ -116,4 +114,8 @@ Route::get("/new", function(){
 Route::post("addRetail", "retailCont@newRetail");
 Route::post("/retail/upl", "pictCont@addPics");
 Route::get("/retail/delpic/{pic}","pictCont@delPic");
+});
+Route::group(["middleware"=> "auth"], function(){
+	Route::get("/dashboard", function(){ return view("dashboard"); });
+	Route::get("/dashboard/mylist/{num}", "retailCont@listMyRetail");
 });

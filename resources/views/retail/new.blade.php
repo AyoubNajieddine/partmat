@@ -81,9 +81,6 @@
 					</div>
 				    </div>
 				    <div class="form-group">
-						<input type="text" class="form-control" name="ret_post_address" placeholder="{{trans('new.pstaddr') }}" />
-					</div>
-				    <div class="form-group">
 						<input type="text" class="form-control" name="ret_post_zip" placeholder="{{trans('new.zipcode') }}" />
 					</div>
 				    </div>

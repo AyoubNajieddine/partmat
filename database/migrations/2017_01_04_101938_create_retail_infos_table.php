@@ -15,7 +15,6 @@ class CreateRetailInfosTable extends Migration
     {
         Schema::create('retail_infos', function (Blueprint $table) {
             $table->increments('id');
-	    $table->string("title");
 	    $table->string("adresse_retail");
 	    $table->integer("zipcode");
 	    $table->integer("city_id")->unsigned();
@@ -26,6 +25,7 @@ class CreateRetailInfosTable extends Migration
 	    $table->integer("rent")->in([1,2]); // true for rent false for buy
 	    $table->double("price");
 	    $table->double("surface");
+	    $table->text("info");
 	    $table->boolean("balc")->default(false)->nullable();
 	    $table->boolean("gar")->default(false)->nullable();
 	    $table->boolean("furn")->default(false)->nullable();
