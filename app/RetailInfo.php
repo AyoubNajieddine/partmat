@@ -13,5 +13,8 @@ class RetailInfo extends Model
 	function pics(){
 		return $this->hasMany("App\picture");
 	}
+	function city(){
+		return $this->belongsTo("App\City");
+	}
 		
 }

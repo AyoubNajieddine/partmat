@@ -12,3 +12,52 @@
     height:29px;
     width:29px;	
 }
+.ret_dash {
+	height:130px;
+	position:relative;
+	border-radius:0px !important;
+}
+.ret_dash .panel-body {
+	padding:0px !important;
+}
+.ret_dash .text-success {
+	font-size:15px !important;
+}
+.partmat_data {
+	padding:5px;
+}
+.partmat_data small {
+	font-size:9px;
+}
+.partmat_pic {
+	margin-right:5px;
+}
+.partmat_btn {
+	position:absolute;
+	bottom:4px;		
+}
+.partmat_btn {
+	width:180px;
+	text-align:center;
+}
+.partmat_btn td {
+	padding-left:5px;
+	padding-right:5px;
+}
+#updpartma .chev_link {
+    position: absolute;
+    top: 38%;
+    left: 10px;
+}
+.edit_opt {
+    position:absolute;
+    opacity:0;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+	/*
+		in here should go all the pictures
+	*/
+

@@ -25,5 +25,8 @@ return [
         "old_password" => [
         	"required"=> "كلمة السر الحالية ضرورية",
         ],
+	"address" => [
+		"required" => "عنوان العقار ضروري",
+	],
     ]
 ];

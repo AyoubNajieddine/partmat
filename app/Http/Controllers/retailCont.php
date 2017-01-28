@@ -6,64 +6,47 @@ use Illuminate\Http\Request;
 use App\RetailInfo as retail;
 use App\picture as picture;
 use App\User as user;
+use App\city as city;
 use Auth;
+use Illuminate\Hashing\BcryptHasher as hasher;
 use DB;
+use Validator;
 class retailCont extends Controller
 {
 	
 // Add Retail Global Function
 	function newRetail(Request $req){
-			// new form Fields 
-		
 		$retail = new retail;
-
-		$retlocation = $req->ret_address;
-		$retcity = $req->ret_city;
-		$rettype = $req->ret_type;
-		$retloc = $req->ret_loc;
-		$retprice = $req->ret_price;
-		$retsurface = $req->ret_surface;
-		$retinfo = $req->ret_info;
-		$retphone = $req->ret_post_phone;
 		$picarray = $req->pics;
-		$zipcode = $req->ret_post_zip;	
-			// frmdyn fomr Fields
-		$retail->adresse_retail = $retlocation;
-		$retail->zipcode = $zipcode;
-		//$retail->city_id = $retcity;
-		$retail->phone = $retphone;
-		$retail->rent = $retloc;
-		$retail->price = $retprice;
-		$retail->surface = $retsurface;
-		$retail->type = $rettype;
-		$retail->city_id = $retcity;
-		$retail->info = $retinfo;	
-		if($rettype != "la" || $rettype != "st"){
-		$retrooms = $req->ret_rooms;	
-		$retbalc = $req->ret_balc;
-		$retgara = $req->ret_gara;
-		$retfurn = $req->ret_furn;
-		$retail->nbRooms = $retrooms;
-		$retail->balc = $retbalc;
-		$retail->gar = $retgara;
-		$retail->furn = $retfurn;	
-		}
-		$user = (Auth::user());
-		if($user->retails()->save($retail)){
-			$ret = true;
-		}
+		$retail->adresse_retail = $req->ret_address;
+		$retail->zipcode = $req->ret_post_zip;
+		$retail->phone = $req->ret_post_phone;
+		$retail->rent = $req->ret_loc;
+		$retail->price = $req->ret_price;
+		$retail->surface =  $req->ret_surface;
+		$retail->type = $req->ret_type;
+		$retail->city_id = $req->ret_city;
+		$retail->info = $req->ret_info;	
+			if( $req->ret_type != "la" || $req->ret_type != "st"){
+				$retail->nbRooms = $req->ret_rooms;
+				$retail->balc = $req->ret_balc;
+				$retail->gar = $req->ret_gara;
+				$retail->furn = $req->ret_furn;	
+			}
+				$user = (Auth::user());
+			if($user->retails()->save($retail)){
+				$ret = true;
+			}
 		if(sizeof($picarray)){
-		for($i = 0; $i < sizeof($picarray); $i++)	{
-		$pics[$i] = new picture;
-	        $pics[$i]->picture_name = $picarray[$i];
-	}
+			for($i = 0; $i < sizeof($picarray); $i++)	{
+				$pics[$i] = new picture;
+				$pics[$i]->picture_name = $picarray[$i];
+			}
 		
 		if($retail->pics()->saveMany($pics)){
 			$ret = true;
 		}
 		}
-		// relating the user to the retail_info
-		// and retail info to pictures
 		if($ret == true){
 			return redirect("/dashboard");
 		}	
@@ -82,9 +65,58 @@ class retailCont extends Controller
 	}
 	function listMyRetail($num){
 		$user = (Auth::user());
-		//$mypics = DB::table("retail_infos")->where("user_id", "=", $user->id)->limit(10)->offset($num)->leftJoin('pictures', 'retail_infos.id', '=','pictures.retail_info_id')->select("pictures.*")->get();	
-		$myretails = $user->retails;	
+		$id = $user->id;
+		$sqlRetail = "SELECT *,DATE_FORMAT(created_at,'%d-%m-%Y') as dt FROM retail_infos WHERE user_id = ".$id." LIMIT ".$num.",".($num+10);
+		$cityRetail = "SELECT name_ar FROM cities WHERE id=";
+		$picsRetail = "SELECT picture_name FROM  pictures WHERE retail_info_id = ";
+		$objArray;
+		$retail  = DB::select($sqlRetail);
+		for($i = 0 ; $i < sizeof($retail) ; $i++){
+			$obj = new \stdClass;
+			//$obj->address = $retail[0]->adresse_retail;
+			//$obj->zipcode = $retail[0]->zipcode;
+			$obj->id = $retail[$i]->id;
+			$obj->rent = $retail[$i]->rent."_rt";
+			$obj->price = $retail[$i]->price;
+			$obj->type = $retail[$i]->type;	
+			$obj->dt = $retail[$i]->dt;
+			//$obj->phone = $retail[0]->phone;
+			//$obj->surface = $retail[0]->surface;
+			$obj->city = DB::select($cityRetail.$retail[$i]->city_id)[0]->name_ar;
+			$obj->pics = DB::select($picsRetail.$retail[$i]->id." LIMIT 0,1")[0]->picture_name;
+				//if($cityRetail->furn != null)
+				//if($cityRetail->balc != null)
+				//if($cityRetail->gar != null)
+			
+			$objArray[$i] = $obj;
+		}
+			return view("retail.list")->with(["objArray" => $objArray]);
 		
-		//return dd($myretails[0]->pics[0]->picture_name);
+		
+	}
+	function updrtl($id){
+			// we need to get informations on the retail id
+			// the list of pictures,
+			// all the changes should be uploaded 
+		$cities = city::all();
+		$retail = retail::where("id","=",$id)->get();
+		$pics = $retail[0]->pics;
+		return view("retail.update")->with(["id"=>$id, "cities"=>$cities, "retail"=>$retail[0],"pics" => $pics]);
+	
+	}
+	function updateRetail($elem, $id, Request $req){
+		// we need to Validate the request
+			// we need get the Object
+		$retail = retail::where("id", "=", $id)->get();
+		$validator = Validator::make($req->all(), [
+			"address" => "required",
+		]);
+		if($validator->fails() == false){
+				// Saving the Object	
+		}
+		else {
+			return $validator->errors();
+		}
+		
 	}
 }

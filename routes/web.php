@@ -92,8 +92,8 @@ Route::post("/deluser", "userCont@deluser");
 });
 // USER RESET GROUP
 Route::group(["middleware" => "guest"], function(){
-Route::post("/reset/email", "Auth\ForgotPasswordController@sendResetLinkEmail");
-Route::post("/reset/password", "Auth\ResetPasswordController@reset");
+	Route::post("/reset/email", "Auth\ForgotPasswordController@sendResetLinkEmail");
+	Route::post("/reset/password", "Auth\ResetPasswordController@reset");
 });
 Route::get("/resetReq", function(){ return View("user.password_reset.resetReq"); });
 Route::get("/password/reset/{token}", function($token){ return View("user.password_reset.resetSub")->with(["tkn" =>  $token]); });
@@ -103,19 +103,21 @@ Route::get("/password/reset/{token}", function($token){ return View("user.passwo
 		/**********************************************/
 
 Route::group(['middleware' => 'auth'], function(){
-Route::get("/new/frm/{tp}", function($tp){	
-		return view("retail.frmdyn")->with(["tp"=>$tp]);
-});
-Route::get("/new", function(){ 
+	Route::get("/new/frm/{tp}", function($tp){	
+			return view("retail.frmdyn")->with(["tp"=>$tp]);
+	});
+	Route::get("/new", function(){ 
 	$cities = App\city::all();
 	return view("retail.new")->with(["cities"=>$cities]); 
 
 	});
-Route::post("addRetail", "retailCont@newRetail");
-Route::post("/retail/upl", "pictCont@addPics");
-Route::get("/retail/delpic/{pic}","pictCont@delPic");
+	Route::post("addRetail", "retailCont@newRetail");
+	Route::post("/retail/upl", "pictCont@addPics");
+	Route::get("/retail/delpic/{pic}","pictCont@delPic");
 });
 Route::group(["middleware"=> "auth"], function(){
 	Route::get("/dashboard", function(){ return view("dashboard"); });
 	Route::get("/dashboard/mylist/{num}", "retailCont@listMyRetail");
+	Route::get("/dashboard/updretail/{id}", "retailCont@updrtl");
+	Route::post("/dashboard/updretail/update/{elem}/{id}","retailCont@updateRetail");	
 });

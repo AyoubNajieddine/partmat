@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="{{ URL::to('css/header.css') }}" />
 	<link rel="stylesheet" href="{{ URL::to('css/new.css') }}" />
 	<link rel="stylesheet" href="{{ URL::to('css/dashboard.css') }}" />
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="content-type" content="text-html,charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
