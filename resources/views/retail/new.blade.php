@@ -8,8 +8,16 @@
 			<div class="panel-heading" style="background-color:white;">{{ trans('new.newpartma') }}</div>
 			<div class="panel-body">
 				    <div class="form-group">
+					<select name="ret_city" class="form-control">
+						<option>{{ trans('new.city') }}</option>
+						@foreach($cities as $city)
+						<option value="{{ $city->id }}">{{ $city->name_ar }}</option>
+						@endforeach
+					</select>
+				    </div>
+				    <div class="form-group">
 					<div class="input-group" dir="ltr">
-						<span class="input-group-addon bg-primary"><i class="glyphicon glyphicon-map-marker"></i></span>
+						<span class="input-group-addon bg-primary" ><i class="glyphicon glyphicon-map-marker" style="position:relative;"><a class="edit_opt" href="#data"></a></i></span>
 						<input type="text" class="form-control" name="ret_address" placeholder="{{ trans('new.address') }}" dir="rtl"/>
 					</div>
 				    </div>
@@ -18,14 +26,6 @@
 						<option value="-1">{{ trans('new.rentbuy') }}</option>
 						<option value="1">{{ trans('new.rent') }}</option>
 						<option value="2">{{ trans('new.buy') }}</option>
-					</select>
-				    </div>
-				    <div class="form-group">
-					<select name="ret_city" class="form-control">
-						<option>{{ trans('new.city') }}</option>
-						@foreach($cities as $city)
-						<option value="{{ $city->id }}">{{ $city->name_ar }}</option>
-						@endforeach
 					</select>
 				    </div>
 				    <div class="form-group">

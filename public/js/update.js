@@ -9,12 +9,14 @@ $(document).ready(function(){
   $(".edit_opt").click(function(){
 	elem = $(this).attr("data");
 	$("#updpartma_menu").hide();
-	$(elem).show();	
+	$(elem).show();
+	console.log(elem);	
   });
   $(".cancel").click(function(){
 	elem = $(this).attr("data");
 	$(elem).hide();	
 	$("#updpartma_menu").show();
+	console.log(elem);
   });
   $("form").submit(function(event){
 	event.preventDefault();
@@ -37,8 +39,7 @@ $(document).ready(function(){
 		$(".alert ul").html("<li>"+ret.address+"</li>");
 		}
 		else {
-			$(elem).hide();
-			$("#updpartma_menu").show();
+			document.location = "/dashboard/updretail/1";
 		}
 	}
   });

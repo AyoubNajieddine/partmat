@@ -66,7 +66,7 @@ class retailCont extends Controller
 	function listMyRetail($num){
 		$user = (Auth::user());
 		$id = $user->id;
-		$sqlRetail = "SELECT *,DATE_FORMAT(created_at,'%d-%m-%Y') as dt FROM retail_infos WHERE user_id = ".$id." LIMIT ".$num.",".($num+10);
+		$sqlRetail = "SELECT *,DATE_FORMAT(created_at,'%d-%m-%Y') as dt FROM retail_infos WHERE user_id = ".$id." LIMIT ".$num.",".($num+5);
 		$cityRetail = "SELECT name_ar FROM cities WHERE id=";
 		$picsRetail = "SELECT picture_name FROM  pictures WHERE retail_info_id = ";
 		$objArray;
@@ -109,10 +109,12 @@ class retailCont extends Controller
 			// we need get the Object
 		$retail = retail::where("id", "=", $id)->get();
 		$validator = Validator::make($req->all(), [
-			"address" => "required",
+			"adresse_retail" => "required",
 		]);
 		if($validator->fails() == false){
 				// Saving the Object	
+			
+			retail::where("id","=",$id)->update($req->all());
 		}
 		else {
 			return $validator->errors();
