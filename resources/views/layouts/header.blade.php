@@ -2,8 +2,8 @@
 
 	<div id="itm" class="content">
 
-		<center><div id="logo"><img src="http://q-ec.bstatic.com/static/img/b26logo/booking_logo_retina/22615963add19ac6b6d715a97c8d477e8b95b7ea.png"></center>
-		</div>
+		<center><div id="logo"><img src="http://q-ec.bstatic.com/static/img/b26logo/booking_logo_retina/22615963add19ac6b6d715a97c8d477e8b95b7ea.png">
+		</div></center>
 		<div id="menu">
 			@if(Auth::check())
 			<table class="fl">

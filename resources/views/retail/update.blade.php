@@ -141,6 +141,7 @@
 					</center>
 						</div>
 					</div>
+
 				</form>
 			</div>
 					<!-- rent -->
@@ -160,6 +161,7 @@
 					<a class="btn btn-default btn-md cancel" data="#rent">{{ trans("updpwd.cancel") }}</a>
 					</center>
 					</div>
+				  </div>
 				  </div>
 				</form>
 			</div>
