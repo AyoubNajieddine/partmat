@@ -1,6 +1,7 @@
 @extends("layouts.master")
 
 @section("content")
+<script type="text/javascript" src="{{ URL::to('/js/master.js') }}"></script>
 <script src="{{ URL::to('js/new.js') }}"></script>	
 <div id="newpart">
 				<form action="/addRetail" method="POST">
@@ -11,7 +12,7 @@
 					<select name="ret_city" class="form-control">
 						<option>{{ trans('new.city') }}</option>
 						@foreach($cities as $city)
-						<option value="{{ $city->id }}">{{ $city->name_ar }}</option>
+						<option value="{{ $city->id }}">{{ trans("cities.".$city->id) }}</option>
 						@endforeach
 					</select>
 				    </div>

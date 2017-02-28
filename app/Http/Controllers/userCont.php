@@ -154,7 +154,7 @@ class userCont extends Controller
 		}
 	}
 	function delUser(){
-		$id = (Auth::user())->id;
+		$id = Auth::user()->id;
 		User::destroy([$id]);
 		Auth::logout();
 		return redirect("/login");

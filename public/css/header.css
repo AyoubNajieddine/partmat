@@ -1,14 +1,16 @@
 #header {
 	box-shadow:0 1px 1px rgba(0, 0, 0, 0.05);
 	border-bottom:1px solid #DDDDDD;
-	background-color:#002747;
+	background-color:#006CC9;
 	color:white;
 	font-size:20px;
 	min-height:45px;
 	width:100%;
 	top:0px;
 	z-index:3;
-	
+}
+#header a {
+	color:white;
 }
 #header table {
 	margin-bottom:8px ;

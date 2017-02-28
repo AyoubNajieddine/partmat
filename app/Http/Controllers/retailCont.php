@@ -60,8 +60,30 @@ class retailCont extends Controller
 	function viewRetail(){
 		
 	}
-	function listRetail(){
-
+	function listRetail($offset){
+		$objArray;
+		$retail = retail::limit(10)->offset(0)->get();
+		$obj = new \stdClass;
+		for($i = 0 ; $i < sizeof($retail) ; $i++){
+			$obj = new \stdClass;
+			//$obj->address = $retail[0]->adresse_retail;
+			//$obj->zipcode = $retail[0]->zipcode;
+			$obj->id = $retail[$i]->id;
+			$obj->rent = $retail[$i]->rent."_rt";
+			$obj->price = $retail[$i]->price;
+			$obj->type = $retail[$i]->type;	
+			$obj->dt = $retail[$i]->dt;
+			//$obj->phone = $retail[0]->phone;
+			//$obj->surface = $retail[0]->surface;
+			$obj->city = $retail[$i]->city_id;
+			$obj->pics = $retail[$i]->pics->first();
+			$obj->furn = $retail[$i]->furn;
+			$obj->balc = $retail[$i]->balc;
+			$obj->gar = $retail[$i]->gar;	
+			$objArray[$i] = $obj;
+		}
+			//return dd($obj);
+			return view("retail.partmat")->with(["objArray" => $objArray]);	
 	}
 	function listMyRetail($num){
 		$user = (Auth::user());
@@ -107,13 +129,17 @@ class retailCont extends Controller
 	function updateRetail($elem, $id, Request $req){
 		// we need to Validate the request
 			// we need get the Object
+		// 06 68 23 67 47
 		$retail = retail::where("id", "=", $id)->get();
 		$validator = Validator::make($req->all(), [
-			"adresse_retail" => "required",
+		"adresse_retail" => "between:6,100",
+		"zipcode" => "size:5|numeric",
+		"phone" => "size:10|numeric",
+		"price" => "min:0",
+		"surface" => "min:0",
 		]);
 		if($validator->fails() == false){
 				// Saving the Object	
-			
 			retail::where("id","=",$id)->update($req->all());
 		}
 		else {
@@ -121,4 +147,11 @@ class retailCont extends Controller
 		}
 		
 	}
+	function getRetailInfo($id){
+		$infos = retail::where("id", $id)->first();
+		// we need to get the pictures
+		$pics = $infos->pics;
+		return View("retail.info")->with(["infos"=>$infos,"pics"=>$pics]);
+	}
+	
 }

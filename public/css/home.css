@@ -1,0 +1,59 @@
+#searchBox {
+	background-color:#006CC9;
+	padding:12px 30px;
+	border-radius:3px;
+}
+#searchBox h3,#searchBox small {
+	color:white;
+	margin-top:0;
+}
+#listCity ul {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+.cityref {
+	height:109px;
+	width:100%;
+	background-repeat:no-repeat;
+	background-size:100%;
+	position:relative;
+	margin-bottom:11px;
+	color:white;
+	border-radius:3px;
+}
+.cityref h3,.cityref span {
+	position:absolute;
+}
+.cityref span {
+	right:5px;
+	top:35%;
+	font-size:37px;
+	font-weight:bold;
+}
+.cityref h3 {
+	top:18px;
+	left:5px;
+	font-size:37px;
+}
+.citylink {
+	top:0;
+	bottom:0;
+	right:0;
+	left:0;
+	position:absolute;
+}
+#putcomm {
+	padding:20px 10px;
+	width:100%;
+	margin-bottom:11px;
+	font-size:37px;
+	position:relative;
+}
+#putcomm span {
+	right:5px;
+	top:34%;
+	font-size:37px;
+	font-weight:bold;
+	position:absolute;
+}

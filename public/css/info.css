@@ -1,0 +1,19 @@
+.infoPics {
+	height:300px;
+	width:300px;
+	
+}
+.navimg {
+	color:black;
+	position:relative;
+	height:auto;
+	width:100%;
+	margin:auto;
+}
+.navImg {
+	font-size:25px;
+	font-weight:bold;
+}
+.call {
+	margin-bottom:10px;
+}

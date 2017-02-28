@@ -11,8 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
+Route::get('/', function(){
+	$cities = App\city::all();
+	return view("home")->with(["cities"=>$cities]); 
 });
 Route::get("/lang/{lg}", function($lg){
 	switch($lg){
@@ -119,5 +120,8 @@ Route::group(["middleware"=> "auth"], function(){
 	Route::get("/dashboard", function(){ return view("dashboard"); });
 	Route::get("/dashboard/mylist/{num}", "retailCont@listMyRetail");
 	Route::get("/dashboard/updretail/{id}", "retailCont@updrtl");
-	Route::post("/dashboard/updretail/update/{elem}/{id}","retailCont@updateRetail");	
+	Route::post("/dashboard/updretail/update/{elem}/{id}","retailCont@updateRetail");
 });
+	Route::get("/list/{offset}", "retailCont@listRetail");
+	Route::get("/search", "SearchCont@search");
+	Route::get("/viewret/{id}", "retailCont@getRetailInfo");	

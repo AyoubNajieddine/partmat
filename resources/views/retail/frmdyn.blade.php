@@ -2,7 +2,7 @@
 		<!-- in case the House -->	
 	@if($tp != "la" && $tp != "st")
 		<!-- in case not land or house -->
-				    <div class="form-group" dir="ltr">
+		    <div class="form-group" dir="ltr">
 					
 					<div class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-bed"></i></span>

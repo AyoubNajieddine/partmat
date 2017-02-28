@@ -2,6 +2,8 @@
 
 @section("content")
 	@include("layouts.errors")
+	<div class="panel panel-default">
+	<div class="panel-body">
 	<div id="loginDiv">
 	<form action="logUser" method="POST">
 		<input type="text" name="email" placeholder="{{trans('login.user_holder')}}" class="form-control" value="{{ Request::old('email') }}" />
@@ -19,4 +21,5 @@
 		<a href="/register" class="btn btn-lg fl btn-success">{{ trans("login.btn_register") }}</a>
 		<br><br>
 		<center><a href="/resetReq">{{ trans("login.forgot") }}</a></center>
+	</div></div>
 @endsection

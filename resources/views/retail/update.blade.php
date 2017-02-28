@@ -1,5 +1,6 @@
 @extends("layouts.master")
 @section("content")
+<script type="text/javascript" src="{{ URL::to('/js/master.js') }}"></script>
 <script src="/js/update.js"></script>
 	<div id="updpartma">
 		  <div id="updpartma_menu">
@@ -54,7 +55,7 @@
 				</tr>
 				<tr>
 					<td style="position:relative;">	
-				<a  data="#rent" class="edit_opt"></a>
+				<a  data="#city" class="edit_opt"></a>
 						<h4>{{ trans("new.city")}}<br><small>{{ $retail->city->name_ar}}</small></h4>	
 					<a href="#" class="glyphicon glyphicon-chevron-left chev_link"></a>
 					</td>
@@ -62,28 +63,21 @@
 			@if($retail->type != "st" && $retail->type != "la")
 				<tr>
 					<td style="position:relative;">	
+				<a  data="#carac" class="edit_opt"></a>
 						<h4>{{ trans("new.carac") }}<br><br><small>
-		<ul>
-		@if($retail->balc)
-		<li>	{{ trans("new.balc") }}</li> 
-		@endif
-		@if($retail->gar)	
-			<li>{{ trans("new.gara") }}</li>
-		@endif
-		@if($retail->furn)
-			<li>{{ trans("new.furn") }}</li>
-		@endif
-		</ul>	
-	</small></h4>
-			
+							<ul>
+							@if($retail->balc) <li>{{ trans("new.balc") }}</li> @endif
+							@if($retail->gar) <li>{{ trans("new.gara") }}</li> @endif
+							@if($retail->furn) <li>{{ trans("new.furn") }}</li> @endif
+							</ul>	
+					</small></h4>	
 					<a href="#" class="glyphicon glyphicon-chevron-left chev_link"></a>
 					</td>
 				</tr>
 			
 				<tr>
 					<td style="position:relative;">
-				<a  data="#nbRooms" class="edit_opt"></a>
-					<a href="#" class="glyphicon glyphicon-chevron-left chev_link"></a>
+				<a  data="#nbrooms" class="edit_opt"></a>
 			<h4>{{ trans("new.piece") }}<br><small>{{ $retail->nbRooms }}</small></h4>
 				
 					<a href="#" class="glyphicon glyphicon-chevron-left chev_link"></a>
@@ -93,6 +87,7 @@
 				 @endif
 				<tr>
 					<td style="position:relative">	
+				<a  data="#pictures" class="edit_opt"></a>
 						<h4>{{ trans("dashboard.editpic")}}</h4>
 
 					<a href="#" class="glyphicon glyphicon-chevron-left chev_link"></a>
@@ -100,6 +95,7 @@
 				</tr>
 				<tr>
 					<td style="position:relative">	
+				<a  data="#zipcode" class="edit_opt"></a>
 						<h4>{{ trans("new.zipcode")}}<br><small>{{ $retail->zipcode }}</small></h4>
 
 					<a href="#" class="glyphicon glyphicon-chevron-left chev_link"></a>
@@ -107,6 +103,7 @@
 				</tr>
 						<tr>
 					<td style="position:relative">	
+				<a  data="#addinfo" class="edit_opt"></a>
 						<h4>{{ trans("new.info")}}<br><small>{{ $retail->info }}</small></h4>
 
 					<a href="#" class="glyphicon glyphicon-chevron-left chev_link"></a>
@@ -151,7 +148,7 @@
 					<div class="panel-body">
 						<!-- rent data -->
 				    <div class="form-group">
-					<select name="ret_loc" class="form-control">
+					<select name="rent" class="form-control">
 						<option value="-1">{{ trans('new.rentbuy') }}</option>
 						<option value="1">{{ trans('new.rent') }}</option>
 						<option value="2">{{ trans('new.buy') }}</option>
@@ -171,9 +168,9 @@
 				   <div class="panel panel-default">
 					<div class="panel-heading" style="background-color:white;"><b>{{ trans("dashboard.edit") }} {{ trans("new.type") }}</b></div>
 					<div class="panel-body">
-						<!-- rent data -->
+						<!-- type data -->
 				    <div class="form-group">
-					<select name="ret_type" class="form-control">
+					<select name="type" class="form-control">
 						<option>{{ trans('new.type') }}</option>
 						<option value="ap" >{{ trans('new.ap')}}</option>
 						<option value="vi">{{ trans('new.vi')}}</option>
@@ -183,6 +180,7 @@
 						<option value="la" >{{ trans('new.la')}}</option>
 					</select>
 				    </div>
+					<br>
 					<center>
 					<button class="btn btn-primary btn-md inp ">{{ trans("updpwd.save") }}</button>
 					<a class="btn btn-default btn-md cancel" data="#type">{{ trans("updpwd.cancel") }}</a>
@@ -197,14 +195,15 @@
 				   <div class="panel panel-default">
 					<div class="panel-heading" style="background-color:white;"><b>{{ trans("dashboard.edit") }} {{ trans("new.price") }}</b></div>
 					<div class="panel-body">
-						<!-- rent data -->
+						<!-- price data -->
 				    <div class="form-group">
 					<label for="ret_price"></label>
 					<div class="input-group" dir="ltr">
 						<span class="input-group-addon"><i>{{ trans('new.currency') }}</i></span>
-						<input type="text" class="form-control" name="ret_price" dir="rtl" placeholder="{{ trans('new.price') }}"/>
+						<input type="text" class="form-control" name="price" dir="rtl" placeholder="{{ trans('new.price') }}"/>
 					</div>
 				    </div>
+					<br>
 					<center>
 					<button class="btn btn-primary btn-md inp ">{{ trans("updpwd.save") }}</button>
 					<a class="btn btn-default btn-md cancel" data="#price">{{ trans("updpwd.cancel") }}</a>
@@ -219,15 +218,16 @@
 				   <div class="panel panel-default">
 					<div class="panel-heading" style="background-color:white;"><b>{{ trans("dashboard.edit") }} {{ trans("new.surface") }}</b></div>
 					<div class="panel-body">
-						<!-- rent data -->
+						<!-- surface data -->
 				    <div class="form-group">
 					<div class="input-group" dir="ltr">
 						<span class="input-group-addon">	
 						<i>m<sup>2</sup></i>
 						</span>
-						<input type="text" class="form-control" name="ret_surface" placeholder="{{ trans('new.surface') }}" dir="rtl"/>
+						<input type="text" class="form-control" name="surface" placeholder="{{ trans('new.surface') }}" dir="rtl"/>
 					</div>	
 				    </div>
+					<br>
 					<center>
 					<button class="btn btn-primary btn-md inp ">{{ trans("updpwd.save") }}</button>
 					<a class="btn btn-default btn-md cancel" data="#surface">{{ trans("updpwd.cancel") }}</a>
@@ -243,7 +243,18 @@
 				   <div class="panel panel-default">
 					<div class="panel-heading" style="background-color:white;"><b>{{ trans("dashboard.edit") }} {{ trans("new.phone") }}</b></div>
 					<div class="panel-body">
-						<!-- rent data -->
+						<!-- phone data -->
+				  <div class="form-group">
+					<div class="input-group" dir="ltr">
+						<span class="input-group-addon bg-primary"><i class="glyphicon glyphicon-earphone"></i></span>
+						<input type="text" class="form-control" name="phone" dir="rtl" placeholder="{{ trans('new.phone') }}"/>
+					</div>
+				  </div>
+					<br>
+					<center>
+					<button class="btn btn-primary btn-md inp ">{{ trans("updpwd.save") }}</button>
+					<a class="btn btn-default btn-md cancel" data="#phone">{{ trans("updpwd.cancel") }}</a>
+					</center>
 					</div>
 				  </div>
 				</form>
@@ -254,10 +265,23 @@
 				   <div class="panel panel-default">
 					<div class="panel-heading" style="background-color:white;"><b>{{ trans("dashboard.edit") }} {{ trans("new.city") }}</b></div>
 					<div class="panel-body">
-						<!-- rent data -->
+						<!-- city data -->		
+				    <div class="form-group">
+					<select name="city_id" class="form-control">
+						<option>{{ trans('new.city') }}</option>
+						@foreach($cities as $city)
+						<option value="{{ $city->id }}">{{ $city->name_ar }}</option>
+						@endforeach
+					</select>
+				    </div>
+					<br>	
+					<center>
+					<button class="btn btn-primary btn-md inp ">{{ trans("updpwd.save") }}</button>
+					<a class="btn btn-default btn-md cancel" data="#city">{{ trans("updpwd.cancel") }}</a>
+					</center>
+				
 					</div>
 				  </div>
-					<label for="address">{{ trans("new.city") }}</label>
 				</form>
 			</div>
 					<!-- carac -->
@@ -266,8 +290,17 @@
 				   <div class="panel panel-default">
 					<div class="panel-heading" style="background-color:white;"><b>{{ trans("dashboard.edit") }} {{ trans("new.carac") }}</b></div>
 					<div class="panel-body">
-						<!-- rent data -->
+						<!-- caratersitic data -->
+						
+					<label><input type="checkbox" name="balc" value="1" @if($retail->balc) checked @endif >  {{ trans('new.balc') }}</label><br>
+					<label><input type="checkbox" name="gar" value="1" @if($retail->gar) checked @endif > {{ trans('new.gara') }}</label><br>
+					<label><input type="checkbox" name="furn" value="1" @if($retail->furn) checked @endif > {{ trans('new.furn') }}</label><br>
+					<center>
+					<button class="btn btn-primary btn-md inp">{{ trans("updpwd.save") }}</button>
+					<a class="btn btn-default btn-md cancel" data="#carac">{{ trans("updpwd.cancel") }}</a>
+					</center>
 					</div>
+				
 				  </div>
 				</form>
 			</div>
@@ -277,11 +310,100 @@
 				   <div class="panel panel-default">
 					<div class="panel-heading" style="background-color:white;"><b>{{ trans("dashboard.edit") }} {{ trans("new.pictures") }}</b></div>
 					<div class="panel-body">
-						<!-- rent data -->
+						<!-- pictures data -->
+						<?php $counter = 0; ?>
+							@foreach($pics as $pic)
+						<div class="thumb_div {{ $counter }}" ><span class="glyphicon glyphicon-remove-sign thumb_cls text-danger" target-data=".thumb_div {{ $counter }}"></span><img class="img-thumbnail upl_list" width="99px" height="100px" src="/thumbs/{{ $pic->picture_name }}"/></div>	
+						<?php $counter = $counter+1; ?>
+							@endforeach	
+					<div class="fileUpld btn btn-success btn-lg">
+						<span class="glyphicon glyphicon-camera" dir="ltr"></span>
+						<input type="file" name="img[]" class="upload" id="upld" cs="{{ csrf_token() }}" required/>
+					</div>
+					</div>
+					<div class="panel-footer" style="background-color:white;">
+					<center>
+					<button class="btn btn-primary btn-md inp">{{ trans("updpwd.save") }}</button>
+					<a class="btn btn-default btn-md cancel" data="#pictures">{{ trans("updpwd.cancel") }}</a>
+					</center>
+					</div>		
+				  </div>
+				</form>
+			</div>
+					<! -- nbrooms -->
+			 <div id="nbrooms" style="display:none;">
+				<form action="update/nbrooms/{{ $id }}" method="POST">
+				   <div class="panel panel-default">
+					<div class="panel-heading" style="background-color:white;"><b>{{ trans("dashboard.edit") }} {{ trans("new.piece") }}</b></div>
+					<div class="panel-body">
+						<!-- nbrooms data -->	
+				    <div class="form-group" dir="ltr">
+					
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-bed"></i></span>
+					<select name="nbRooms" class="form-control" style="text-align:right;">
+							<option value="-1">{{ trans('new.piece') }}</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10+</option>
+					</select>
+					</div>	
+				    </div>	
+				<br>	
+					<center>
+					<button class="btn btn-primary btn-md inp ">{{ trans("updpwd.save") }}</button>
+					<a class="btn btn-default btn-md cancel" data="#nbrooms">{{ trans("updpwd.cancel") }}</a>
+					</center>
 					</div>
 				  </div>
 				</form>
 			</div>
+
+
+				<!-- zipcode -->
+
+			 <div id="zipcode" style="display:none;">
+				<form action="update/zipcode/{{ $id }}" method="POST">
+				   <div class="panel panel-default">
+					<div class="panel-heading" style="background-color:white;"><b>{{ trans("dashboard.edit") }} {{ trans("new.zipcode") }}</b></div>
+					<div class="panel-body">		
+				    		<div class="form-group">
+						<input type="text" class="form-control" name="zipcode" placeholder="{{trans('new.zipcode') }}" />
+						</div>	
+					<br>	
+					<center>
+					<button class="btn btn-primary btn-md inp ">{{ trans("updpwd.save") }}</button>
+					<a class="btn btn-default btn-md cancel" data="#zipcode">{{ trans("updpwd.cancel") }}</a>
+					</center>
+					</div>
+				  </div>
+				</form>
+			</div>
+	
+				<!-- retail add info -->	
+			 <div id="addinfo" style="display:none;">
+				<form action="update/info/{{ $id }}" method="POST">
+				   <div class="panel panel-default">
+					<div class="panel-heading" style="background-color:white;"><b>{{ trans("dashboard.edit") }} {{ trans("new.info") }}</b></div>
+					<div class="panel-body">
+						<!-- retail add data -->
+					<textarea class="form-control" rows="8" style="resize:none;" name="info" placeholder="{{ trans('new.info') }}"></textarea><br>	
+					<center>
+					<button class="btn btn-primary btn-md inp">{{ trans("updpwd.save") }}</button>
+					<a class="btn btn-default btn-md cancel" data="#addinfo">{{ trans("updpwd.cancel") }}</a>
+					</center>
+					</div>
+				  </div>
+				</form>
+			</div>
+		
 		</div>
 	</div>	
 @endsection

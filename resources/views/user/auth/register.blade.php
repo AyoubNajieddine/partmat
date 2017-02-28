@@ -1,7 +1,7 @@
 @extends("layouts.master")
 @section("content")
 		@include("layouts.errors")
-		<div id="formDiv">
+		<div id="formDiv"><div class="panel panel-default"><div class="panel-body">
 			<form action="/addUser" method="POST">
 				<label for="full_name">{{trans("register.name_lb") }}</label>
 				<input type="text" class="form-control" name="full_name" value="{{ old('full_name') }}"  /><br>
@@ -13,5 +13,5 @@
 				<input type="submit" class="btn btn-primary btn-lg inp fl" value="{{trans('register.register_btn') }}" />
 				<input name="_token" value="{{ csrf_token() }}" type="hidden" />
 			</form>
-		</div>
+		</div></div></div>
 @endsection
