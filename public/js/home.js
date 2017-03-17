@@ -1,11 +1,11 @@
-var offset = 0;
-function loadData(){
-	$.get("/list/"+offset, function(data){
-		$("#listPartma").append(data);
-	});
-}
 $(document).ready(function(){
-		// we need to load all the latest files	
-	//loadData();
+$("form[action=search]").submit(function(event){
+	console.log(this);
+	event.preventDefault();
+	sel = $("select");
+	CityVal = sel[0].value;
+	rentType= sel[1].value;
+	retailType = sel[2].value; 
+	window.location = "/search/"+CityVal+"/"+retailType+"/"+rentType;
 });
-
+});

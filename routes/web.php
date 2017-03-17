@@ -123,5 +123,5 @@ Route::group(["middleware"=> "auth"], function(){
 	Route::post("/dashboard/updretail/update/{elem}/{id}","retailCont@updateRetail");
 });
 	Route::get("/list/{offset}", "retailCont@listRetail");
-	Route::get("/search", "SearchCont@search");
+	Route::get("/search/{city}/{type}/{rent}", "SearchCont@search");
 	Route::get("/viewret/{id}", "retailCont@getRetailInfo");	

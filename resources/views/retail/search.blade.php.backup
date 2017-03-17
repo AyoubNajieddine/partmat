@@ -1,0 +1,113 @@
+@extends("layouts.master")
+@section("content")
+
+	<script type="text/javascript" src="js/search.js"></script>
+	<div id="addSearch">
+	{{ trans("cities.".$_GET['ret_city']) }},
+	{{  trans("dashboard.".$_GET['ret_loc']."_rt") }},
+	{{ trans("new.".$_GET['ret_type']) }}
+	<hr /><a class="text-info" id="showAdv" data-toggle="collapse" href="#advSearch">{{ trans("home.advanced") }}  <span class="glyphicon glyphicon-chevron-down"> </span></a>
+	<div class="collapse" id="advSearch">
+            <br>
+		<form method="GET" action="/search">
+				  <div class="form-group">
+					<select name="ret_city" class="form-control">
+						<option value="-1">{{ trans('new.city') }}</option>
+						@foreach($cities as $city)
+						<option value="{{ $city->id }}">{{ trans("cities.".$city->id) }}</option>
+						@endforeach
+					</select>
+					<script>$("select[name=ret_city]").val({{ $_GET['ret_city'] }});</script>
+				  </div>
+				    <div class="form-group">
+					<select name="ret_loc" class="form-control">
+						<option value="-1">{{ trans('new.rentbuy') }}</option>
+						<option value="1">{{ trans('new.rent') }}</option>
+						<option value="2">{{ trans('new.buy') }}</option>
+					</select>
+					<script>$("select[name=ret_city]").val({{ $_GET['ret_loc']}});</script>
+				    </div>
+				    <div class="form-group">
+					<select name="ret_type" class="form-control">
+                                            
+                                                <option value="-1" >{{ trans('new.type') }}</option>
+						<option value="ap" >{{ trans('new.ap')}}</option>
+						<option value="vi" >{{ trans('new.vi')}}</option>
+						<option value="ho" >{{ trans('new.ho')}}</option>
+						<option value="fl" >{{ trans('new.fl')}}</option>
+						<option value="st" >{{ trans('new.st')}}</option>
+						<option value="la" >{{ trans('new.la')}}</option>
+					</select>
+					<script>$("select[name=ret_city]").val({{ $_GET['ret_type'] }});</script>
+				  </div>
+				<a data-toggle="collapse" href="#srchCase" id="hideCase">{{ trans("new.carac") }}<span class="glyphicon glyphicon-chevron-down"> </span><br><br></a>
+		@if($_GET['ret_type'] == "la" || $_GET['ret_type'] == "st" || $_GET['ret_type'] == "-1") <script>$("#hideCase").hide();</script> @endif
+			<div id="srchCase" class="collapse">
+				<div class="form-group">
+					<select name="ret_rooms" class="form-control" style="text-align:right;">
+							<option value="-1">{{ trans('new.piece') }}</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10+</option>
+					</select>
+				</div>
+				 <div class="form-group">    
+					<label><input type="checkbox"  name="ret_balc" value="1">  {{ trans('new.balc') }}</label>
+					<label><input type="checkbox" name="ret_gara" value="1"> {{ trans('new.gara') }}</label>
+					<label><input type="checkbox" name="ret_furn" value="1"> {{ trans('new.furn') }}</label>
+				</div>
+			</div>
+				<a data-toggle="collapse" href="#tbprice">{{ trans("dashboard.priceval") }}<span class="glyphicon glyphicon-chevron-down"> </span></a><br>
+			<div class="collapse" id="tbprice">
+			<br>
+			<table class="fl">
+				<!-- Hidden search data here -->
+					<tr>
+						<td><input type="text" class="form-control" name="minprice" placeholder="{{ trans('new.minprice') }}"/></td>
+						<td><input type="text" class="form-control" name="maxprice" placeholder="{{ trans('new.maxprice') }}"/></td>
+					</tr>
+			</table>
+			</div><br>
+				<a data-toggle="collapse" href="#tbsurface">{{ trans("dashboard.surfaceval") }}<span class="glyphicon glyphicon-chevron-down"> </span></a><br>
+			<div class="collapse" id="tbsurface">
+			<br>
+			<table class="fl">
+					<tr>
+						<td><input type="text" class="form-control" name="minsurf" placeholder="{{ trans('new.minsurf') }}"/></td>
+						<td><input type="text" class="form-control" name="maxsurf" placeholder="{{ trans('new.maxsurf') }}"/></td>
+					</tr>
+			</table></div><br>
+			<button class="btn btn-md btn-info"><span class="glyphicon glyphicon-search"></span> {{ trans('home.search') }}</button>
+		</form>
+	</div>
+	</div>
+	<br>
+	<div id="searchData" class="row">
+	   @if(count($data) > 0)
+		@foreach($data as $retail)
+	<a href="/viewret/{{ $retail->id }}" class="lnkRet col-md-6 col-xs-12">
+	<div class="retailElem panel panel-default">
+	<img src="@if(count($retail->pics) > 0) thumbs/{{ ($retail->pics)[0]->picture_name }} @else icons/home.png @endif" class="imgSide"/>
+		<p>
+		<strong>{{ $retail->price}} {{ trans("new.currency") }} </strong><span class="label label-success">{{ trans("new.".$retail->type) }}</span><br>
+		<strong><span class="text-info">{{ trans("cities.".$retail->city_id) }}</span></strong><br>
+		<strong><span class="text-success"><u>{{ trans("dashboard.".$retail->rent."_rt") }}</u></span></strong>,{{ $retail->surface}} m<sup>2</sup>,
+		<span class="text-info">{{ trans("new.more") }}...</span>
+		</p>
+	</div>
+	</a>
+		@endforeach
+	   @else
+		<div class="panel panel-default">
+			<center>{{ trans("home.nothing") }}</center>
+	       </div>
+	@endif
+	</div>	
+@endsection
