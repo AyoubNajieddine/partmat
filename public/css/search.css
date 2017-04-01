@@ -35,8 +35,9 @@ p {
 	margin-bottom:0px;
 }
 #addSearch span {
-	margin-left:8px;
+	margin-left:6px;
 }
+/*
 #addSearch a {
 	position:absolute;
 	top:0;
@@ -44,17 +45,52 @@ p {
 	right:0;
 	bottom:0;
 }
+*/
 .pagin b {
 	padding-left:30px;
 	padding-right:30px;
 }
 .menuSearchDiv {
 	background-color:white;
+	position:absolute;
+	top:1px;
+	width:98%;
+	margin:1px auto;
+	background-color:white;
 }
 .menuSearch {	
-	background-color:#006CC9;
-	
+	background-color:#006CC9;	
 }
 .hideSearchDiv {
 	display:none;
+}
+.mnusearch td {
+	text-align:center;
+}
+
+
+/* 
+	Advanced Dynamic Menu
+
+*/
+#constMenu {
+	display:none;
+	background-color:#006CC9;
+	padding:12px 30px;
+	border-radius:3px;
+}
+#MenuHead a { 
+	float:left;
+	color:white;
+	font-size:15px;
+}
+#MenuTitle {
+	color:white;
+	font-size:15px;
+}
+#dynForm {
+	color:white;
+}
+#sortRes {
+	font-size:15px;
 }

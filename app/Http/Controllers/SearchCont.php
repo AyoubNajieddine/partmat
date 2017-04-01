@@ -14,35 +14,20 @@ class SearchCont extends Controller
 		if($city != "-1") $arr['city_id'] = $city;	
 		if($type != "-1") $arr['type'] = $type;
 		if($rent != "-1") $arr['rent'] = $rent;
-		$data = retail::where($arr)->paginate(1);
-		//print_r($data);
-		//$data = $data->where("price", ">=", $req->minprice);
-		//dd($data->get();/*		if(isset($req->minval)) 
-	//	if(isset($req->maxval))
-	//	if(isset($req->minsurf))
-	//	if(isset($req->maxsurf))
-	//	if($req->ret_type != "la" || $req->req_type != "st"){
-			// to we can get the number of rooms and caractestics
-	//		if(isset($req->ret_rooms) && $req->ret_rooms != -1)
-	//		if(isset($req->ret_balc)) 
-	//		if(isset($req->ret_gara))
-	//		if(isset($req->ret_furn))
-	//	}
-
-		/*$arr = $req->all();
-		$keys = array_keys($arr);
-		$counter = 0;
-		foreach($arr as $val){
-			
-			$keys[$counter];
-			$counter++;
-		}	
-		*/
-		//$data->setPath($req->fullUrl());
-		
-	//	print_r($data->nextPageUrl());
-	
-	return View("retail.search")->with(["data" => $data, "cities"=>$cities, "city"=>$city, "rent"=>$rent, "type"=>$type]);	
+		$data = retail::where($arr);
+		if(isset($_GET['srt'])){
+			// then sort the request based in the sort data
+		//desc or asc 
+		// column number
+		$srtN = $_GET['srt'];
+		if($srtN == 1) $data = $data->orderBy("created_at", "desc"); 
+		if($srtN == 2) $data = $data->orderBy("price", "asc"); 
+		if($srtN == 3) $data = $data->orderBy("price", "desc"); 
+		if($srtN == 4) $data = $data->orderBy("surface", "asc"); 
+		if($srtN == 5) $data = $data->orderBy("surface", "desc"); 
+		}
+		$data = $data->paginate(10);	
+	return View("retail.search")->with(["data" => $data, "cities"=>$cities, "citySel"=>$city, "rent"=>$rent, "type"=>$type]);	
 		
 	}	
 }	
