@@ -43,7 +43,7 @@
 			</td></tr>
 		</table>
 			@endif 
-			<button class="phn glyphicon glyphicon-phone btn btn-success btn-sm" value="{{ $infos->phone }}"></button><span>{{ $infos->phone }}</span>
+			<button class="phn btn btn-success btn-lg fl" value="{{ $infos->phone }}"><span>{{ $infos->phone }}</span></button>
 	</div>
 @endsection
 

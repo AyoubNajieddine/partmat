@@ -94,3 +94,11 @@ p {
 #sortRes {
 	font-size:15px;
 }
+#searchcara a {
+	color:white;
+	padding:5px 2px;
+	display:block;
+}
+#searchcara a span {
+	float:left;
+}

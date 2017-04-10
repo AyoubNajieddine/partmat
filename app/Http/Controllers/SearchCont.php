@@ -16,7 +16,7 @@ class SearchCont extends Controller
 		if($rent != "-1") $arr['rent'] = $rent;
 		$data = retail::where($arr);
 		if(isset($_GET['srt'])){
-			// then sort the request based in the sort data
+		// then sort the request based in the sort data
 		//desc or asc 
 		// column number
 		$srtN = $_GET['srt'];
@@ -27,7 +27,11 @@ class SearchCont extends Controller
 		if($srtN == 5) $data = $data->orderBy("surface", "desc"); 
 		}
 		$data = $data->paginate(10);	
-	return View("retail.search")->with(["data" => $data, "cities"=>$cities, "citySel"=>$city, "rent"=>$rent, "type"=>$type]);	
+		return View("retail.search")->with(["data" => $data, "cities"=>$cities, "citySel"=>$city, "rent"=>$rent, "type"=>$type]);	
+	
+	
+	}
+	function advancedSort(){
 		
 	}	
 }	

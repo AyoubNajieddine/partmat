@@ -13,5 +13,7 @@ return array(
 	"editpic" => "حذف أو إضافة صور",
 	"surfaceval"=>  "تحديد المساحة",
 	"priceval" => "تحديد الثمن",
+	"nbroomsval" => "تحديد عدد الغرف",
+	"retailcara" => "امتيازات العقار",
 	// we still need a lot in this
 	);

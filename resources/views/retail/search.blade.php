@@ -41,9 +41,20 @@
 			<button class="btn btn-md btn-info"><span class="glyphicon glyphicon-search"></span> {{ trans('home.search') }}</button>	
 					</form>					
 				</div>
-				<div class="collapse" id="searchcalc">
-					
+			<!-- 
+				Advanced Search Box	
+
+			-->
+				<div class="collapse" id="searchcara">
+					<a data-target="#price"  ><b>{{ trans('dashboard.priceval') }}</b><span class="glyphicon glyphicon-chevron-left"></span></a><br>
+					<a data-target="#surface" ><b>{{ trans('dashboard.surfaceval') }}</b><span class="glyphicon glyphicon-chevron-left"></span></a><br>		
+					<a data-target="#retailcara" ><b>{{ trans('dashboard.nbroomsval') }}</b><span class="glyphicon glyphicon-chevron-left"></span></a><br>	
+					<a data-target="#nbroom" ><b>{{ trans('dashboard.retailcara') }}</b><span class="glyphicon glyphicon-chevron-left"></span></a>
+				
 				</div>
+			<!-- 
+				Search Sort
+			-->
 				<div class="collapse" id="sortRes">
 					<form action="" method="GET">
 						<input type="radio" value="1"  name="sortby"/> {{ trans("home.newest") }} <br>
